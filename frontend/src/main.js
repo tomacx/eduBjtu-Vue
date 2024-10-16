@@ -2,5 +2,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// 引入 Element Plus
+import ELementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
-createApp(App).use(store).use(router).mount('#app')
+
+const app = createApp(App)
+app.use(ELementPlus)
+app.use(router)
+app.mount('#app')
+console.log('Vue 3 应用已经成功初始化');
