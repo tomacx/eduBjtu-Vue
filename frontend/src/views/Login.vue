@@ -79,7 +79,7 @@
           if (!valid) return; //false 不执行登录
           //true执行登录
           try {
-            const {data: res} = await axios.post("http://localhost:8000/users/login", this.loginForm, {
+            const {data: res} = await axios.post("http://localhost:8000/student/login", this.loginForm, {
               headers: {
                 'Content-Type': 'application/json'
               }
@@ -88,8 +88,8 @@
               console.log(res);
               this.$message.success("登录成功！");
               //保存登录后的token状态
-              window.sessionStorage.setItem("token", res.data.access_token);
-              console.log(res.data.token);
+             // window.sessionStorage.setItem("token", res.data.access_token);
+             // console.log(res.data.token);
               //存储userId
               window.sessionStorage.setItem('userId', res.data.user.username);
               console.log(this.loginForm.username)

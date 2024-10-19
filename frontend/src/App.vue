@@ -1,7 +1,4 @@
 <template>
-  <nav>
-    <router-view />
-  </nav>
   <router-view/>
 </template>
 
