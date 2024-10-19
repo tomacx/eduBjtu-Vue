@@ -11,8 +11,8 @@
                 <user-filled />
               </el-avatar>
               <div class="header_right_button">{{ userName }}</div>
-              <div><el-button class="header_right_button" @click="logout">个人中心</el-button></div>
-              <div><el-button class="header_right_button" @click="goToProfile">安全退出</el-button></div>
+              <div><el-button class="header_right_button" @click="goToProfile">个人中心</el-button></div>
+              <div><el-button class="header_right_button" @click="logout">安全退出</el-button></div>
             </div>
 </template>
 <script>
