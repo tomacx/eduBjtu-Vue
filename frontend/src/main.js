@@ -11,5 +11,6 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 app.use(ELementPlus)
 app.use(router)
+app.use(store)
 app.mount('#app')
 console.log('Vue 3 应用已经成功初始化');

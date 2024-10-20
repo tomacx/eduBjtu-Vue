@@ -46,6 +46,11 @@
           username: '',
           password: '',
         },
+        userInfo: {
+                username: '',  // 用户名
+                userNum:'',
+                status: '',  // 用户身份
+        },
         //表单验证规则对象
         loginFormRules: {
           //用户名是否合法
@@ -87,12 +92,9 @@
             if (res.status === 200) {
               console.log(res);
               this.$message.success("登录成功！");
-              //保存登录后的token状态
-             // window.sessionStorage.setItem("token", res.data.access_token);
-             // console.log(res.data.token);
-              //存储userId
-              window.sessionStorage.setItem('userId', res.data.user.username);
-              console.log(this.loginForm.username)
+              this.userInfo.userNum = res.user.studentnum;
+              this.userInfo.password = res.user.password;
+              console.log(this.userInfo)
               if (this.loginForm.username === "admin" && this.loginForm.password === "123456")
                 this.$router.push("/admin");//登录跳转
               else this.$router.push("/");//登录跳转
