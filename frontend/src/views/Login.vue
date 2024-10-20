@@ -47,6 +47,7 @@
           password: '',
         },
         userInfo: {
+                userId:'',
                 username: '',  // 用户名
                 userNum:'',
                 status: '',  // 用户身份
@@ -94,7 +95,16 @@
               this.$message.success("登录成功！");
               this.userInfo.userNum = res.user.studentnum;
               this.userInfo.password = res.user.password;
-              console.log(this.userInfo)
+              // 统一将用户信息存储到 Vuex
+              this.$store.dispatch('updateUserInfo', {
+                userId: res.user.id,      // 从返回数据中获取用户ID
+                username: res.user.name,  // 从返回数据中获取用户名
+                userNum: res.user.studentnum,    // 从返回数据中获取用户编号
+                password:res.user.password,
+                status: 1,      // 从返回数据中获取用户身份 //TODO 修改数据库
+              });
+              console.log(this.$store.state.userInfo)
+              
               if (this.loginForm.username === "admin" && this.loginForm.password === "123456")
                 this.$router.push("/admin");//登录跳转
               else this.$router.push("/");//登录跳转
