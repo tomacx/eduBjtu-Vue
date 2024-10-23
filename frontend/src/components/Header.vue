@@ -1,10 +1,10 @@
 <template>
           <div class="logo">智慧课程平台</div>
             <div class="menu">
-              <el-menu :default-active="activeMenu" mode="horizontal" class="el-menu-demo">
-                <el-menu-item index="1">我的课程</el-menu-item>
+              <el-menu :default-active="activeMenu" mode="horizontal" class="el-menu-demo"@select="handleSelect">
+    <el-menu-item index="1">我的课程</el-menu-item>
                 <el-menu-item index="2">我的课表</el-menu-item>
-              </el-menu>
+              </el-menu>  
             </div>
             <div class="profile">
               <el-avatar>
@@ -32,6 +32,13 @@ export default {
     goToProfile() {
       // 跳转到个人中心页面
       this.$router.push('/profile');
+    },
+    handleSelect(key) {
+      if (key === '1') {
+        this.$router.push('/');  // 返回主页
+      } else if (key === '2') {
+        this.$router.push('/timetable');
+      }
     },
     logout() {
       // 执行退出操作
