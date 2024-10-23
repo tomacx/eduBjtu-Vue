@@ -23,17 +23,15 @@
           </div>
         </el-card>
   
-        <!-- 通知提醒 -->
+        <!-- 收藏及笔记 -->
         <el-card class="notification-card">
-            <h3>通知提醒</h3>
-            <el-divider />
             <div class="button-container">
           <div class="button">
             <el-button class="large-button">
               <el-icon><StarFilled /></el-icon>
               <div class="button-text">
                 <div class="detail">收藏</div>
-              <div class="detail">123</div>
+              <div class="detail">{{ collectionNum }}</div>
               </div>
             </el-button>
           </div>
@@ -43,7 +41,7 @@
               <el-icon><Notebook /></el-icon>
               <div class="button-text">
                 <div class="detail" >笔记</div>    
-                <div class="detail" >45</div>
+                <div class="detail" >{{ noteNum }}</div>
               </div>
             </el-button>
             </div>
@@ -65,11 +63,11 @@
           <el-row :gutter="20" class="course-list">
             <el-col :span="8" v-for="(course, index) in courses" :key="index">
               <el-card class="course-card" shadow="hover">
-                <img src="path-to-image.jpg" class="course-image" />
+                <img src="../assets/classCover.jpg" class="course-image" />
                 <div class="course-info">
                   <p class="course-title">{{ course.name }}</p>
                   <p>课程号：{{ course.id }}</p>
-                  <p>课序号：{{ course.sequence }}</p>
+                  <p>任课老师：{{ course.teacher }}</p>
                 </div>
               </el-card>
             </el-col>
@@ -91,6 +89,7 @@
   <script>
   import { ref } from 'vue';
   import { UserFilled,StarFilled,Notebook } from "@element-plus/icons-vue";
+import axios from 'axios';
 
   export default {
     data() {
@@ -98,15 +97,16 @@
               userName: 'testUser',
               status: 1, // 默认为1表示学生
               userNum:'12345678',
-            
+            collectionNum: '',
+              noteNum:'',
             selectedSemester: '2024-2025第一学期',
             courses: [
-                { name: '文化遗产与旅游', id: 'A112066B', sequence: '01' },
-                { name: '羽毛球（高级）', id: 'A121066B', sequence: '07' },
-                { name: '软件项目管理与产品运营', id: 'M310008B', sequence: '02' },
-                { name: '机器学习', id: 'M310006B', sequence: '03' },
-                { name: '计算机组成原理', id: 'M310001B', sequence: '03' },
-                { name: '软件测试与质量保证', id: 'M310007B', sequence: '03' }
+                { name: '文化遗产与旅游', id: 'A112066B', teacher: '张三' },
+                { name: '羽毛球（高级）', id: 'A121066B', teacher: '李四' },
+                { name: '软件项目管理与产品运营', id: 'M310008B', teacher: '王五' },
+                { name: '机器学习', id: 'M310006B', teacher: '李四' },
+                { name: '计算机组成原理', id: 'M310001B', teacher: '李四' },
+                { name: '软件测试与质量保证', id: 'M310007B', teacher: '赵六' }
             ]
       };
     },
@@ -115,11 +115,21 @@
         StarFilled,
         Notebook,
     },
+    mounted() {
+      //this.getCourseList();
+      //this.getNotificationList();
+    },
     methods: {
-        toProfile() {
-            // 跳转到个人中心页面
-            this.$router.push('/profile');
-        },
+      toProfile() {
+        // 跳转到个人中心页面
+        this.$router.push('/profile');
+      },
+      getCourseList() {
+        axios.post('http://localhost:8000/home/courselist',{params:{userId:this.$store.state.userId}})
+      },
+      getNotificationList() {
+        
+      },
     },
   };
 </script>
@@ -220,5 +230,5 @@ background-color: #CCCCCC;
 .large-button {
   border: transparent;
 }
-  </style>
+</style>
   
